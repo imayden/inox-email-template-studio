@@ -22,13 +22,13 @@
     },
     {
       "id": "property-unit-removal",
-      "zh": "Property / Unit 删除与移除",
-      "en": "Property & Unit Removal"
+      "zh": "Property / Unit 删除与离开",
+      "en": "Property & Unit Deletion / Leaving"
     },
     {
       "id": "access-logs",
-      "zh": "Access Log 通行记录",
-      "en": "Access Logs"
+      "zh": "Audit Trail 通行记录",
+      "en": "Audit Trail"
     },
     {
       "id": "lost-id",
@@ -285,11 +285,11 @@
       "id": "MAIL_3791614789",
       "name": {
         "zh": "通行记录邮件",
-        "en": "Access Log Email"
+        "en": "Audit Trail Email"
       },
       "scenario": {
         "zh": "用户查看日志时点击“邮件发送日志”后，该设备下的所有通行日志将以附件形式发送给所有者。",
-        "en": "Sends all access logs for a selected device to the owner as an email attachment."
+        "en": "Sends the complete audit trail for a selected device to the owner as an email attachment."
       },
       "groups": [
         "access-logs"
