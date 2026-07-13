@@ -149,7 +149,6 @@ export function build() {
   fs.rmSync(distRoot, { recursive: true, force: true });
   fs.mkdirSync(path.join(distRoot, 'templates'), { recursive: true });
   copyDirectory(webRoot, distRoot);
-  copyDirectory(path.join(sourceRoot, 'assets'), path.join(distRoot, 'assets'));
 
   const outputTemplates = [];
   for (const template of catalog.templates) {

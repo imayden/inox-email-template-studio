@@ -22,7 +22,7 @@ if (/\sstyle=/.test(componentsHtml)) issues.push('shared/components.html contain
 if (!/:root\s*\{/.test(sharedCss)) issues.push('shared/email.css is missing :root design variables');
 if (!/sandbox="[^"]*allow-popups-to-escape-sandbox/.test(indexHtml)) issues.push('preview iframe popups remain inside the sandbox');
 for (const asset of requiredAssets) {
-  if (!fs.existsSync(path.join(sourceRoot, 'assets', asset))) issues.push(`missing source asset: src/assets/${asset}`);
+  if (!fs.existsSync(path.join(root, 'web', 'assets', asset))) issues.push(`missing web asset: web/assets/${asset}`);
   if (!fs.existsSync(path.join(root, 'dist', 'assets', asset))) issues.push(`missing deployed asset: dist/assets/${asset}`);
 }
 
