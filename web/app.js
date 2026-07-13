@@ -34,7 +34,7 @@ const t = (key) => messages[state.locale][key] || key;
 const sampleValues = {
   userName: 'Alex Chen', inviterName: 'Morgan Lee', contactName: 'Jordan Kim', email: 'morgan@example.com', propertyName: 'Harbor Point',
   unitName: 'Unit 1208', deviceName: 'Main Entrance', deviceID: 'INOX-A7C92', password: '4862', code: '825914', ekey: 'RFID E-key',
-  startTime: 'May 15, 2026 · 9:00 AM', endTime: 'May 22, 2026 · 6:00 PM', time: 'May 15, 2026 · 3:42 PM',
+  startTime: 'May 15, 2026 · 9:00 AM', endTime: 'May 22, 2026 · 6:00 PM', time: '15 minutes',
   link: 'https://inoxsmart.com/register', cardID: 'RFID-2048-91', cardName: 'Lobby Card', cardOwner: 'Taylor Smith', lostTime: 'May 22, 2026 · 6:00 PM',
   plan_name: 'INOX Smart Pro', effective_date: 'June 15, 2026', requester_name: 'Alex Chen', requester_email: 'alex@example.com',
   manager_name: 'Morgan Lee', manager_email: 'morgan@example.com', contact_name: 'Jordan Kim', contact_email: 'billing@example.com',
