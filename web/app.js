@@ -150,6 +150,14 @@ async function fetchHtml(id, language) {
   }));
   return state.cache.get(key);
 }
+
+// 导出文件继续使用可公开访问的绝对 URL；站内预览改用当前站点的素材，方便本地开发。
+function withPreviewAssets(html) {
+  const deployedAssets = 'https://inox-smart-email-template-studio.netlify.app/assets/';
+  const localAssets = new URL('assets/', document.baseURI).href;
+  return html.replaceAll(deployedAssets, localAssets);
+}
+
 function withSampleData(html) {
   let rendered = html;
   if (html.includes('data-access-scope-list')) {
@@ -237,7 +245,8 @@ async function renderPreview() {
   renderTemplateMeta();
   try {
     const raw = await fetchHtml(template.id, state.previewLanguage); if (state.previewId !== template.id) return;
-    $('#emailFrame').srcdoc = state.sampleData ? withSampleData(raw) : raw;
+    const preview = withPreviewAssets(raw);
+    $('#emailFrame').srcdoc = state.sampleData ? withSampleData(preview) : preview;
   } catch (error) { toast(error.message); }
 }
 
@@ -271,7 +280,7 @@ function bindEvents() {
   $$('.language-choice input').forEach((input) => input.addEventListener('change', () => { input.checked ? state.exportLanguages.add(input.value) : state.exportLanguages.delete(input.value); renderExportSummary(); }));
   $('#downloadButton').addEventListener('click', downloadSelected);
   $('#copyHtml').addEventListener('click', async () => { await navigator.clipboard.writeText(await fetchHtml(state.previewId, state.previewLanguage)); toast(t('copied')); });
-  $('#openPreview').addEventListener('click', async () => { const raw = await fetchHtml(state.previewId, state.previewLanguage); const url = URL.createObjectURL(new Blob([state.sampleData ? withSampleData(raw) : raw], { type: 'text/html' })); window.open(url, '_blank', 'noopener,noreferrer'); setTimeout(() => URL.revokeObjectURL(url), 30000); });
+  $('#openPreview').addEventListener('click', async () => { const raw = withPreviewAssets(await fetchHtml(state.previewId, state.previewLanguage)); const url = URL.createObjectURL(new Blob([state.sampleData ? withSampleData(raw) : raw], { type: 'text/html' })); window.open(url, '_blank', 'noopener,noreferrer'); setTimeout(() => URL.revokeObjectURL(url), 30000); });
   window.addEventListener('popstate', restorePreviewFromRoute);
   window.addEventListener('hashchange', restorePreviewFromRoute);
 }

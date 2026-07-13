@@ -52,7 +52,7 @@
 
 .promo-icon-cell {
   width: 78px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .promo-icon {
@@ -62,30 +62,61 @@
 }
 
 .promo-copy-cell {
-  padding-left: 14px;
-  vertical-align: top;
+  padding: 0 12px 0 14px;
+  vertical-align: middle;
   font-family: var(--font-system);
   color: var(--email-text);
 }
 
 .promo-title {
   margin: 0 0 6px 0;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.3;
   font-weight: bold;
   color: var(--email-primary-dark);
 }
 
 .promo-lead {
   margin: 0 0 6px 0;
-  font-size: 15px;
-  line-height: 1.6;
-  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: normal;
 }
 
 .promo-note {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.promo-link {
+  color: var(--email-primary-dark);
+  text-decoration: underline;
+}
+
+.promo-badges-cell {
+  width: 100px;
+  vertical-align: middle;
+}
+
+.promo-badge-link {
+  display: block;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.promo-store-badge {
+  display: block;
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+.promo-badge-spacer {
+  height: 6px;
+  line-height: 6px;
+  font-size: 0;
 }
 
 .access-scope-list {

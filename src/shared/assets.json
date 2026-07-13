@@ -1,5 +1,10 @@
 {
   "appIcon": "https://images.tuyaus.com/smart/user_avatar/baz1695020876406zdPH/177191609610e2ae976f6.png",
+  "appLearnMoreUrl": "https://www.inoxsmart.com/inox-smart-app",
+  "appStoreUrl": "https://apps.apple.com/us/app/inox-smart/id1586240482",
+  "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.inox.smart&pcampaignid=web_share",
+  "appStoreBadge": "https://inox-smart-email-template-studio.netlify.app/assets/app-store-download.png",
+  "googlePlayBadge": "https://inox-smart-email-template-studio.netlify.app/assets/google-play-download.png",
   "logo": "https://images.tuyaus.com/smart/user_avatar/baz1695020876406zdPH/1771916175899baced4d8.png",
   "supportUrl": "https://inoxsmart.com/support",
   "supportLabel": "inoxsmart.com/support",
