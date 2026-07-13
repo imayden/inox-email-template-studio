@@ -12,6 +12,7 @@ const indexHtml = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
 const appJs = fs.readFileSync(path.join(root, 'web', 'app.js'), 'utf8');
 const componentsHtml = fs.readFileSync(path.join(sourceRoot, 'shared', 'components.html'), 'utf8');
 const sharedCss = fs.readFileSync(path.join(sourceRoot, 'shared', 'email.css'), 'utf8');
+const requiredAssets = ['app-store-download.png', 'google-play-download.png'];
 const indexIds = new Set([...indexHtml.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
 const referencedIds = new Set([...appJs.matchAll(/\$\('#([A-Za-z][\w:-]*)[^']*'\)/g)].map((match) => match[1]));
 
@@ -19,6 +20,11 @@ for (const id of referencedIds) if (!indexIds.has(id)) issues.push(`web/app.js r
 for (const template of manifest.templates) if (!template.groups.length) issues.push(`${template.id}: not assigned to any export use case`);
 if (/\sstyle=/.test(componentsHtml)) issues.push('shared/components.html contains inline CSS');
 if (!/:root\s*\{/.test(sharedCss)) issues.push('shared/email.css is missing :root design variables');
+if (!/sandbox="[^"]*allow-popups-to-escape-sandbox/.test(indexHtml)) issues.push('preview iframe popups remain inside the sandbox');
+for (const asset of requiredAssets) {
+  if (!fs.existsSync(path.join(sourceRoot, 'assets', asset))) issues.push(`missing source asset: src/assets/${asset}`);
+  if (!fs.existsSync(path.join(root, 'dist', 'assets', asset))) issues.push(`missing deployed asset: dist/assets/${asset}`);
+}
 
 for (const template of manifest.templates) {
   const sourceFile = path.join(sourceRoot, 'templates', template.id, 'template.html');
