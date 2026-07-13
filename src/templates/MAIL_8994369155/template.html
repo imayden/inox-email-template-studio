@@ -2,7 +2,7 @@
 <!-- @subject INOX Smart E-key 创建通知 -->
 <!-- Header -->
               <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">
-                创建 E-key
+                E-key 已创建！
               </h1>
 
               <!-- Greeting & intro -->
@@ -10,15 +10,16 @@
                 <strong>${userName}，您好：</strong>
               </p>
               <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">
-                您有一个新的 E-key，请查看。
+                已为您创建一个 E-key。请联系“创建人”栏中列出的人员，获取或设置您的 E-key。完成后，您可以通过下方列出的授权设备进入相应的授权单元。
               </p>
 
               <!-- Details -->
               <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;">
-                <strong>创建人：</strong> ${inviterName}(${email})<br />
+                <strong>创建人：</strong> ${inviterName} (${email})<br />
                 <strong>E-key 类型：</strong> ${ekey}<br />
                 <strong>物业：</strong> ${propertyName}<br />
-                <strong>已授权单元与设备:</strong><span class="access-scope-list" data-access-scope-list><span class="access-scope-row" data-access-scope-row><span class="access-scope-bullet">•</span><span class="access-scope-unit" data-access-scope-unit>${unitName}:</span><span class="access-device-tags" data-access-device-tags><span class="access-device-tag" data-access-device-tag>${deviceName}</span></span></span></span>
+                <strong>已授权单元与设备：</strong><span class="access-scope-list" data-access-scope-list><span class="access-scope-row" data-access-scope-row><span class="access-scope-bullet">•</span><span class="access-scope-unit" data-access-scope-unit>${unitName}:</span><span class="access-device-tags" data-access-device-tags><span class="access-device-tag" data-access-device-tag>${deviceName}</span></span></span></span>
+                <strong>有效期：</strong> <span data-validity-period data-permanent-label="永久">${startTime} &mdash; ${endTime}</span>
               </p>
 
               <!-- Spacer -->
@@ -26,9 +27,8 @@
 
               <!-- Instructions -->
               <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7;">
-                如果您需要帮助处理此问题，我们的支持团队可为您提供协助，请访问
-                <a href="https://inoxsmart.com/support" style="color:#333333; font-weight:bold; text-decoration:none;">inoxsmart.com/support</a>，
-                或致电 <strong>(888) 998-1577</strong>。感谢您使用 INOX Smart！
+                如需设置、更新或移除此 E-key，请联系“创建人”栏中列出的人员或物业管理员。<br /><br />
+                感谢您使用 INOX Smart！
               </p>
 
               <!-- Divider -->
@@ -46,15 +46,16 @@
                 <strong>Hello ${userName},</strong>
               </p>
               <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">
-                You have a new E-key, please check it out.
+                An E-key has been created for you. Please contact the person listed under Created By for instructions on obtaining or setting up your E-key. Once ready, you can use it to access the authorized units through the devices listed below.
               </p>
 
               <!-- Details -->
               <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;">
-                <strong>Created By:</strong> ${inviterName}(${email})<br />
+                <strong>Created By:</strong> ${inviterName} (${email})<br />
                 <strong>E-key Type:</strong> ${ekey}<br />
                 <strong>Property:</strong> ${propertyName}<br />
                 <strong>Authorized Units &amp; Devices:</strong><span class="access-scope-list" data-access-scope-list><span class="access-scope-row" data-access-scope-row><span class="access-scope-bullet">•</span><span class="access-scope-unit" data-access-scope-unit>${unitName}:</span><span class="access-device-tags" data-access-device-tags><span class="access-device-tag" data-access-device-tag>${deviceName}</span></span></span></span>
+                <strong>Validity Period:</strong> <span data-validity-period data-permanent-label="Permanent">${startTime} &mdash; ${endTime}</span>
               </p>
 
               <!-- Spacer -->
@@ -62,9 +63,8 @@
 
               <!-- Instructions -->
               <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7;">
-                If you need help resolving this, our support team is here to assist at
-                <a href="https://inoxsmart.com/support" style="color:#333333; font-weight:bold; text-decoration:none;">inoxsmart.com/support</a>,
-                or call us at <strong>(888) 998-1577</strong>. Thanks for using INOX Smart!
+                For help setting up, updating, or removing this E-key, please contact the person listed under Created By or your property administrator.<br /><br />
+                Thank you for using INOX Smart.
               </p>
 
               <!-- Divider -->
@@ -73,22 +73,23 @@
 <template data-language="es">
 <!-- @subject Creación de E-key de INOX Smart -->
 <!-- Header -->
-              <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">Se ha creado una E-key</h1>
+              <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">¡E-key creada!</h1>
 
               <!-- Greeting & intro -->
               <p style="margin:0 0 16px 0; font-size:16px; line-height:1.5;">
                 <strong>Hola, ${userName}:</strong>
               </p>
               <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">
-                Tienes una nueva E-key, por favor revísala.
+                Se ha creado una E-key para ti. Ponte en contacto con la persona indicada en Creado por para recibir instrucciones sobre cómo obtenerla o configurarla. Una vez lista, podrás usarla para acceder a las unidades autorizadas mediante los dispositivos que se indican a continuación.
               </p>
 
               <!-- Details -->
               <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;">
-                <strong>Creado por:</strong> ${inviterName}(${email})<br />
+                <strong>Creado por:</strong> ${inviterName} (${email})<br />
                 <strong>Tipo de E-key:</strong> ${ekey}<br />
                 <strong>Propiedad:</strong> ${propertyName}<br />
                 <strong>Unidades y dispositivos autorizados:</strong><span class="access-scope-list" data-access-scope-list><span class="access-scope-row" data-access-scope-row><span class="access-scope-bullet">•</span><span class="access-scope-unit" data-access-scope-unit>${unitName}:</span><span class="access-device-tags" data-access-device-tags><span class="access-device-tag" data-access-device-tag>${deviceName}</span></span></span></span>
+                <strong>Periodo de validez:</strong> <span data-validity-period data-permanent-label="Permanente">${startTime} &mdash; ${endTime}</span>
               </p>
 
               <!-- Spacer -->
@@ -96,9 +97,8 @@
 
               <!-- Instructions -->
               <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7;">
-                Si necesitas ayuda para resolver esto, nuestro equipo de soporte está disponible en
-                <a href="https://inoxsmart.com/support" style="color:#333333; font-weight:bold; text-decoration:none;">inoxsmart.com/support</a>,
-                o llámanos al <strong>(888) 998-1577</strong>. Gracias por usar INOX Smart.
+                Para obtener ayuda para configurar, actualizar o eliminar esta E-key, ponte en contacto con la persona indicada en Creado por o con el administrador de la propiedad.<br /><br />
+                Gracias por usar INOX Smart.
               </p>
 
               <!-- Divider -->

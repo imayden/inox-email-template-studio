@@ -33,7 +33,7 @@ const messages = {
 const t = (key) => messages[state.locale][key] || key;
 const sampleValues = {
   userName: 'Alex Chen', inviterName: 'Morgan Lee', contactName: 'Jordan Kim', email: 'morgan@example.com', propertyName: 'Harbor Point',
-  unitName: 'Unit 1208', deviceName: 'Main Entrance', deviceID: 'INOX-A7C92', password: '4862', code: '825914', ekey: 'Permanent',
+  unitName: 'Unit 1208', deviceName: 'Main Entrance', deviceID: 'INOX-A7C92', password: '4862', code: '825914', ekey: 'RFID E-key',
   startTime: 'May 15, 2026 · 9:00 AM', endTime: 'May 22, 2026 · 6:00 PM', time: 'May 15, 2026 · 3:42 PM',
   link: 'https://inoxsmart.com/register', cardID: 'RFID-2048-91', cardName: 'Lobby Card', cardOwner: 'Taylor Smith', lostTime: 'May 12, 2026',
   plan_name: 'INOX Smart Pro', effective_date: 'June 15, 2026', requester_name: 'Alex Chen', requester_email: 'alex@example.com',
@@ -160,7 +160,7 @@ function withPreviewAssets(html) {
 
 function withSampleData(html) {
   let rendered = html;
-  if (html.includes('data-access-scope-list')) {
+  if (html.includes('data-access-scope-list') || html.includes('data-validity-period')) {
     const parsed = new DOMParser().parseFromString(html, 'text/html');
     parsed.querySelectorAll('[data-access-scope-list]').forEach((scope) => {
       const rowTemplate = scope.querySelector('[data-access-scope-row]');
@@ -179,6 +179,14 @@ function withSampleData(html) {
         return row;
       });
       scope.replaceChildren(...rows);
+    });
+
+    const validityIsPermanent = [sampleValues.startTime, sampleValues.endTime]
+      .some((value) => String(value).trim().toLowerCase() === 'permanent');
+    parsed.querySelectorAll('[data-validity-period]').forEach((period) => {
+      period.textContent = validityIsPermanent
+        ? period.dataset.permanentLabel
+        : `${sampleValues.startTime} — ${sampleValues.endTime}`;
     });
     rendered = `<!DOCTYPE html>\n${parsed.documentElement.outerHTML}`;
   }
