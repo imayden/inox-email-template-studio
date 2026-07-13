@@ -168,8 +168,8 @@
         "en": "Property Transfer — New Owner"
       },
       "scenario": {
-        "zh": "当property转让者对新管理员完成邮箱真实性验证后，新管理员会立即接收到项目转让通知邮件，邮件包含项目邀请码，若新管理员同意该项目转让给自己，可登录app填写邮件中的验证码完成property转让。",
-        "en": "After the new administrator’s email is verified, sends the property transfer invitation and code needed to accept the transfer in the app."
+        "zh": "当property转让者对新物业经理完成邮箱真实性验证后，新物业经理会立即接收到项目转让通知邮件，邮件包含项目邀请码，若新物业经理同意该项目转让给自己，可登录app填写邮件中的验证码完成property转让。",
+        "en": "After the new property manager’s email is verified, sends the property transfer invitation and code needed to accept the transfer in the app."
       },
       "groups": [
         "property-invite-transfer"
@@ -188,8 +188,8 @@
         "en": "Property Transfer — Verify New Owner"
       },
       "scenario": {
-        "zh": "property转让者邀请新的管理员时发送的邮件，对新的管理员邮箱真实性进行验证。新的管理员需要提供邮件中的验证码给到转让者，转让者填写验证码后完成验证后，property即可进入转让流程。",
-        "en": "Verifies the incoming property administrator’s email. The recipient shares the code with the current owner to begin the transfer."
+        "zh": "property转让者邀请新的物业经理时发送的邮件，对新的物业经理邮箱真实性进行验证。新的物业经理需要提供邮件中的验证码给到转让者，转让者填写验证码后完成验证后，property即可进入转让流程。",
+        "en": "Verifies the incoming property manager’s email. The recipient shares the code with the current owner to begin the transfer."
       },
       "groups": [
         "property-invite-transfer"
@@ -208,8 +208,8 @@
         "en": "Start Property Transfer"
       },
       "scenario": {
-        "zh": "property所有者发起项目转让时接收的验证码，发起者填写邮件中的验证码进行本人身份验证，验证通过后才可进行下一步邀请新项目管理员。",
-        "en": "Verifies the current property owner’s identity before they can invite a new property administrator."
+        "zh": "property所有者发起项目转让时接收的验证码，发起者填写邮件中的验证码进行本人身份验证，验证通过后才可进行下一步邀请新的物业经理。",
+        "en": "Verifies the current property owner’s identity before they can invite a new property manager."
       },
       "groups": [
         "property-invite-transfer"
