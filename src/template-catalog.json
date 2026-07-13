@@ -1,0 +1,670 @@
+{
+  "groups": [
+    {
+      "id": "access-codes",
+      "zh": "Access Codes 访问密码",
+      "en": "Access Codes"
+    },
+    {
+      "id": "e-keys",
+      "zh": "E-Keys 电子钥匙",
+      "en": "E-Keys"
+    },
+    {
+      "id": "occupancy",
+      "zh": "用户入住",
+      "en": "Users & Occupancy"
+    },
+    {
+      "id": "property-invite-transfer",
+      "zh": "Property 邀请与转让",
+      "en": "Property Invitations & Transfers"
+    },
+    {
+      "id": "property-unit-removal",
+      "zh": "Property / Unit 删除与移除",
+      "en": "Property & Unit Removal"
+    },
+    {
+      "id": "access-logs",
+      "zh": "Access Log 通行记录",
+      "en": "Access Logs"
+    },
+    {
+      "id": "lost-id",
+      "zh": "挂失 ID",
+      "en": "Lost ID"
+    },
+    {
+      "id": "unit-transfer",
+      "zh": "Unit 转让",
+      "en": "Unit Transfers"
+    },
+    {
+      "id": "security-alerts",
+      "zh": "安全告警",
+      "en": "Security Alerts"
+    },
+    {
+      "id": "accounts",
+      "zh": "账户管理",
+      "en": "Account Management"
+    },
+    {
+      "id": "licenses",
+      "zh": "License 许可证",
+      "en": "Licenses"
+    }
+  ],
+  "templates": [
+    {
+      "order": 1,
+      "id": "MAIL_8994369155",
+      "name": {
+        "zh": "新增ekey",
+        "en": "E-key Created"
+      },
+      "scenario": {
+        "zh": "给Inox已注册过的用户批量/单独创建RFID卡，有任意一张卡片创建成功后发送该邮件通知用户。",
+        "en": "Sent when at least one RFID card is successfully created for a registered INOX user."
+      },
+      "groups": [
+        "e-keys"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 2,
+      "id": "MAIL_0093089911",
+      "name": {
+        "zh": "新用户收到邀请",
+        "en": "New User Invitation"
+      },
+      "scenario": {
+        "zh": "在App中邀请全新未注册过Inox的用户入住某单元时发送邮件告知用户用户需要先完成注册，再登录App填写入住邀请码完成入住",
+        "en": "Sent when an unregistered user is invited to a unit. The recipient registers first, then enters the invitation code in the app."
+      },
+      "groups": [
+        "occupancy",
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 3,
+      "id": "MAIL_5310808349",
+      "name": {
+        "zh": "老用户收到邀请",
+        "en": "Existing User Invitation"
+      },
+      "scenario": {
+        "zh": "邀请Inox已注册用户入住某项目某单元且授权了app通行权限时，用户接收邀请入住的验证码，填写邮件中的验证码即可完成入住。",
+        "en": "Sent to a registered INOX user invited to a property or unit with app access. The email contains the verification code required to accept."
+      },
+      "groups": [
+        "occupancy",
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 4,
+      "id": "MAIL_0427351765",
+      "name": {
+        "zh": "邀请老安装者不发code",
+        "en": "Installer Invitation (No Code)"
+      },
+      "scenario": {
+        "zh": "邀请Inox已注册用户给某项目某单元/多个单元下安装设备的通知。",
+        "en": "Notifies a registered user that they have been invited to install devices in one or more units of a property."
+      },
+      "groups": [
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 5,
+      "id": "MAIL_0847685525",
+      "name": {
+        "zh": "邀请用户注册",
+        "en": "Registration Invitation"
+      },
+      "scenario": {
+        "zh": "在项目中添加全新未注册过Inox的用户时发送邮件通知用户完成注册。或者在App中邀请全新未注册的用户入住时同步发送邀请用户完成注册。",
+        "en": "Sent when an unregistered user is added to a property or invited to move in, asking them to complete registration."
+      },
+      "groups": [
+        "occupancy",
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 6,
+      "id": "MAIL_1073914918",
+      "name": {
+        "zh": "新owner收到转让property",
+        "en": "Property Transfer — New Owner"
+      },
+      "scenario": {
+        "zh": "当property转让者对新管理员完成邮箱真实性验证后，新管理员会立即接收到项目转让通知邮件，邮件包含项目邀请码，若新管理员同意该项目转让给自己，可登录app填写邮件中的验证码完成property转让。",
+        "en": "After the new administrator’s email is verified, sends the property transfer invitation and code needed to accept the transfer in the app."
+      },
+      "groups": [
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 7,
+      "id": "MAIL_5709134517",
+      "name": {
+        "zh": "旧owner收到转让property",
+        "en": "Property Transfer — Verify New Owner"
+      },
+      "scenario": {
+        "zh": "property转让者邀请新的管理员时发送的邮件，对新的管理员邮箱真实性进行验证。新的管理员需要提供邮件中的验证码给到转让者，转让者填写验证码后完成验证后，property即可进入转让流程。",
+        "en": "Verifies the incoming property administrator’s email. The recipient shares the code with the current owner to begin the transfer."
+      },
+      "groups": [
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 8,
+      "id": "MAIL_1838145775",
+      "name": {
+        "zh": "发起转让property",
+        "en": "Start Property Transfer"
+      },
+      "scenario": {
+        "zh": "property所有者发起项目转让时接收的验证码，发起者填写邮件中的验证码进行本人身份验证，验证通过后才可进行下一步邀请新项目管理员。",
+        "en": "Verifies the current property owner’s identity before they can invite a new property administrator."
+      },
+      "groups": [
+        "property-invite-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 9,
+      "id": "MAIL_5196908408",
+      "name": {
+        "zh": "删除property",
+        "en": "Delete Property"
+      },
+      "scenario": {
+        "zh": "property所有者发起删除property时进行身份验证而发送的邮件，发起者需填写邮件中的验证码完成身份验证，验证通过后即可完成property删除",
+        "en": "Verifies the property owner’s identity before permanently deleting a property."
+      },
+      "groups": [
+        "property-unit-removal"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 10,
+      "id": "MAIL_4710755152",
+      "name": {
+        "zh": "删除door",
+        "en": "Delete Unit"
+      },
+      "scenario": {
+        "zh": "unit所有者发起删除unit时进行身份验证而发送的邮件，发起者需填写邮件中的验证码完成身份验证，验证通过后即可完成unit删除",
+        "en": "Verifies the unit owner’s identity before permanently deleting a unit."
+      },
+      "groups": [
+        "property-unit-removal"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 11,
+      "id": "MAIL_0994989736",
+      "name": {
+        "zh": "提示上级有人想联系",
+        "en": "Contact Request"
+      },
+      "scenario": {
+        "zh": "给用户创建入住单时，未勾选在app中显示管理者信息，即用户无法在app中查看任何上级用户角色的信息时，用打开app进入单元下用户列表，点击联系邀请者，会给上级用户角色发送通知邮件，告知上级角色的用户有人在联系他。",
+        "en": "Notifies a higher-level manager when a resident who cannot see manager details requests contact through the app."
+      },
+      "groups": [
+        "occupancy"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 12,
+      "id": "MAIL_3791614789",
+      "name": {
+        "zh": "通行记录邮件",
+        "en": "Access Log Email"
+      },
+      "scenario": {
+        "zh": "用户查看日志时点击“邮件发送日志”后，该设备下的所有通行日志将以附件形式发送给所有者。",
+        "en": "Sends all access logs for a selected device to the owner as an email attachment."
+      },
+      "groups": [
+        "access-logs"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 13,
+      "id": "MAIL_4835408033",
+      "name": {
+        "zh": "发起转让door",
+        "en": "Start Unit Transfer"
+      },
+      "scenario": {
+        "zh": "unit所有者发起unit转让时接收的验证码，发起者填写邮件中的验证码进行本人身份验证，验证通过后才可进行下一步邀请新unit管理员。",
+        "en": "Verifies the current unit owner’s identity before they can invite a new unit administrator."
+      },
+      "groups": [
+        "unit-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 14,
+      "id": "MAIL_7361149447",
+      "name": {
+        "zh": "收到转让door",
+        "en": "Unit Transfer — New Owner"
+      },
+      "scenario": {
+        "zh": "当unit转让者对新管理员完成邮箱真实性验证后，新管理员会立即接收到unit转让通知邮件，邮件包含unit邀请码，若新管理员同意该unit转让给自己，可登录app填写邮件中的验证码完成unit转让。",
+        "en": "After the new administrator’s email is verified, sends the unit transfer invitation and code needed to accept the transfer."
+      },
+      "groups": [
+        "unit-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 15,
+      "id": "MAIL_7312302113",
+      "name": {
+        "zh": "原owner校验新owner邮箱正确",
+        "en": "Unit Transfer — Verify New Owner"
+      },
+      "scenario": {
+        "zh": "unit转让者邀请新的管理员时发送的邮件，对新的管理员邮箱真实性进行验证。新的管理员需要提供邮件中的验证码给到转让者，转让者填写验证码后完成验证后，unit即可进入转让流程。",
+        "en": "Verifies the incoming unit administrator’s email. The recipient shares the code with the current owner to begin the transfer."
+      },
+      "groups": [
+        "unit-transfer"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 16,
+      "id": "MAIL_5847689508",
+      "name": {
+        "zh": "离开property",
+        "en": "Leave Property"
+      },
+      "scenario": {
+        "zh": "在app中用户自己主动离开某一项目时发起身份验证，用户需填写邮件中的验证码完成身份验证后，方可从某一项目中离开，即从某一项目下所有unit退房",
+        "en": "Verifies a user before they leave a property and move out of all units under it."
+      },
+      "groups": [
+        "occupancy",
+        "property-unit-removal"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 17,
+      "id": "MAIL_5263337167",
+      "name": {
+        "zh": "离开door",
+        "en": "Leave Unit"
+      },
+      "scenario": {
+        "zh": "在app中用户自己主动离开某一unit时发起身份验证，用户需填写邮件中的验证码完成身份验证后方可从某一unit中离开，即从某一unit退房",
+        "en": "Verifies a user before they leave and move out of a specific unit."
+      },
+      "groups": [
+        "occupancy",
+        "property-unit-removal"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 18,
+      "id": "MAIL_3296721359",
+      "name": {
+        "zh": "用户注销",
+        "en": "Delete Account"
+      },
+      "scenario": {
+        "zh": "用户注销时进行本人身份验证，用户填写邮箱中的验证码完成验证后即可完成申请注销。",
+        "en": "Verifies the user’s identity before an account deletion request can be completed."
+      },
+      "groups": [
+        "accounts"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 19,
+      "id": "MAIL_6746979993",
+      "name": {
+        "zh": "创建随机(带有效期)临时密码",
+        "en": "Random Temporary Code (Expiring)"
+      },
+      "scenario": {
+        "zh": "给用户创建随机的带有效期的临时密码后，邮件告知用户具体密码、密码可以打开哪个设备、以及密码有效期信息",
+        "en": "Shares a randomly generated temporary access code, the accessible devices, and its validity period."
+      },
+      "groups": [
+        "access-codes"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 20,
+      "id": "MAIL_5258590677",
+      "name": {
+        "zh": "创建随机(永久)临时密码",
+        "en": "Random Temporary Code (Permanent)"
+      },
+      "scenario": {
+        "zh": "给用户创建随机的永久临时密码后，邮件告知用户具体密码以及密码可以打开哪个设备",
+        "en": "Shares a randomly generated permanent access code and the devices it can open."
+      },
+      "groups": [
+        "access-codes"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 21,
+      "id": "MAIL_9074381975",
+      "name": {
+        "zh": "创建自定义(带有效期)临时密码",
+        "en": "Custom Temporary Code (Expiring)"
+      },
+      "scenario": {
+        "zh": "给用户创建自定义的带有效期的临时密码后，邮件告知用户具体密码、密码可以打开哪个设备、以及密码有效期信息",
+        "en": "Shares a custom temporary access code, the accessible devices, and its validity period."
+      },
+      "groups": [
+        "access-codes"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 22,
+      "id": "MAIL_0443708729",
+      "name": {
+        "zh": "创建自定义(永久)临时密码",
+        "en": "Custom Temporary Code (Permanent)"
+      },
+      "scenario": {
+        "zh": "给用户创建自定义的永久临时密码后，邮件告知用户具体密码、密码可以打开哪个设备",
+        "en": "Shares a custom permanent access code and the devices it can open."
+      },
+      "groups": [
+        "access-codes"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 23,
+      "id": "MAIL_0545773117",
+      "name": {
+        "zh": "创建随机(一次性)临时密码",
+        "en": "Random One-Time Code"
+      },
+      "scenario": {
+        "zh": "给用户创建随机的一次性临时密码后，邮件告知用户具体密码、密码可以打开哪个设备",
+        "en": "Shares a randomly generated one-time access code and the devices it can open."
+      },
+      "groups": [
+        "access-codes"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 24,
+      "id": "MAIL_7148890323",
+      "name": {
+        "zh": "未关门告警",
+        "en": "Door Left Open Alert"
+      },
+      "scenario": {
+        "zh": "当设备设置中打开了未关门告警开关，且设备此时正处于未关门状态并触发告警时，发送邮件告知管理者。",
+        "en": "Alerts a manager when the door-left-open alarm is enabled and the device detects that the door remains open."
+      },
+      "groups": [
+        "security-alerts"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 25,
+      "id": "MAIL_2812370603",
+      "name": {
+        "zh": "ID丢失/被盗告警",
+        "en": "Lost or Stolen Card Alert"
+      },
+      "scenario": {
+        "zh": "当有人使用挂失卡刷卡开门时，管理者将收到丢失卡告警邮件，告知管理者有人正在使用挂失的卡开门，邮件包含卡片信息、挂失时间以便管理者排查告警日志",
+        "en": "Alerts a manager when someone attempts entry with a reported lost card, including card and loss details for investigation."
+      },
+      "groups": [
+        "e-keys",
+        "lost-id",
+        "security-alerts"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 26,
+      "id": "MAIL_0450977619",
+      "name": {
+        "zh": "强制开门警报",
+        "en": "Forced Entry Alert"
+      },
+      "scenario": {
+        "zh": "使用挂失卡片刷卡开门时，用户将收到强行开门警报的邮件",
+        "en": "Alerts the user when a reported lost card is used in a forced-entry attempt."
+      },
+      "groups": [
+        "e-keys",
+        "lost-id",
+        "security-alerts"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 27,
+      "id": "NEW_1",
+      "name": {
+        "zh": "获取授权正式报价",
+        "en": "Request a License Quote"
+      },
+      "scenario": {
+        "zh": "管理员在后台向经销商获取license报价时发送邮件",
+        "en": "Sent to a dealer when an administrator requests a formal license quote from the management portal."
+      },
+      "groups": [
+        "licenses"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 28,
+      "id": "NEW_2",
+      "name": {
+        "zh": "许可证自动续订通知",
+        "en": "License Auto-Renewal Notice"
+      },
+      "scenario": {
+        "zh": "管理员打开license自动续订后，到了自动续订时间将会发送邮件给管理员告知管理员将按照现有的license套餐进行续订。",
+        "en": "Notifies an administrator that their existing license plan will renew automatically on the scheduled date."
+      },
+      "groups": [
+        "licenses"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 29,
+      "id": "NEW_3",
+      "name": {
+        "zh": "许可证即将到期通知",
+        "en": "License Expiration Reminder"
+      },
+      "scenario": {
+        "zh": "当管理员未打开license自动续订通知时，系统将在license即将到期时给管理员发送该邮件，告知用户license套餐即将到期及时续订。",
+        "en": "Reminds an administrator who has not enabled auto-renewal that their license is about to expire."
+      },
+      "groups": [
+        "licenses"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    },
+    {
+      "order": 30,
+      "id": "NEW_4",
+      "name": {
+        "zh": "许可证过期通知",
+        "en": "License Expired Notice"
+      },
+      "scenario": {
+        "zh": "当管理员未打开license自动续订通知且license已过期，系统将在license过期的次日发送邮件告知用户license套餐过期，将无法使用SaaS，可联系经销商进行续订。",
+        "en": "Sent the day after a non-renewing license expires, explaining that SaaS access is unavailable until renewal."
+      },
+      "groups": [
+        "licenses"
+      ],
+      "languages": [
+        "zh",
+        "en",
+        "es"
+      ]
+    }
+  ]
+}

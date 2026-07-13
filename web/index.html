@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="INOX Smart email template preview and export studio" />
+    <title>INOX Email Template Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="catalog-panel">
+        <header class="brand">
+          <span class="brand-mark">M</span>
+          <span><strong>Mailroom</strong><small>INOX TEMPLATE STUDIO</small></span>
+        </header>
+        <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="搜索模板或 ID" /><kbd>⌘ K</kbd></label>
+        <section class="purpose-section">
+          <div class="section-label"><span data-i18n="purposes">用途分类</span><span id="groupCount">0</span></div>
+          <div class="group-list" id="groupList"></div>
+        </section>
+        <section class="template-section">
+          <div class="template-heading">
+            <span><span data-i18n="templates">模板</span> <b id="visibleCount">0</b></span>
+            <span class="tiny-actions"><button id="selectVisible" data-i18n="selectVisible">选择当前</button><button id="clearSelection" data-i18n="clear">清除</button></span>
+          </div>
+          <div class="template-list" id="templateList"></div>
+        </section>
+        <footer class="catalog-footer"><span class="live-dot"></span><span data-i18n="gitManaged">由 Git 源码生成</span><span>v2</span></footer>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="current-title"><span id="templateId">—</span><h1 id="templateName">正在载入…</h1></div>
+          <div class="top-actions">
+            <div class="segmented compact" id="uiLocaleTabs" aria-label="界面语言"><button data-locale="zh" class="active">中文</button><button data-locale="en">EN</button></div>
+            <button class="secondary" id="copyHtml" data-i18n="copyHtml">复制 HTML</button>
+            <button class="primary" id="openPreview"><span data-i18n="openPreview">新窗口预览</span> ↗</button>
+          </div>
+        </header>
+        <section class="scenario-bar"><span id="groupBadges"></span><p id="templateScenario">—</p></section>
+        <section class="preview-toolbar">
+          <div class="segmented" id="languageTabs"><button data-language="zh" class="active">中文</button><button data-language="en">English</button><button data-language="es">Español</button></div>
+          <span class="toolbar-separator"></span>
+          <label class="sample-switch"><span data-i18n="sampleData">示例数据</span><input id="sampleToggle" type="checkbox" checked /><span></span></label>
+          <span class="toolbar-spacer"></span>
+          <div class="segmented compact" id="viewportTabs"><button data-viewport="desktop" class="active" title="桌面">▰</button><button data-viewport="mobile" title="手机">▯</button></div>
+        </section>
+        <section class="preview-stage"><div class="email-canvas" id="emailCanvas"><iframe id="emailFrame" title="邮件预览" sandbox="allow-popups"></iframe></div></section>
+      </main>
+
+      <aside class="export-panel">
+        <header class="export-header"><span class="overline">EXPORT CENTER</span><h2 data-i18n="exportTitle">批量导出</h2><p data-i18n="exportDescription">选择用途、模板和语言，下载可直接二次编辑的原始 HTML。</p></header>
+        <section class="selection-summary"><strong id="selectedCount">0</strong><span data-i18n="templatesSelected">个模板已选择</span><small id="fileCount">0 HTML files</small></section>
+        <section class="export-section">
+          <h3 data-i18n="exportLanguages">导出语言</h3>
+          <label class="language-choice"><input type="checkbox" value="zh" checked /><span><b>中文</b><small>zh.html</small></span></label>
+          <label class="language-choice"><input type="checkbox" value="en" checked /><span><b>English</b><small>en.html</small></span></label>
+          <label class="language-choice"><input type="checkbox" value="es" checked /><span><b>Español</b><small>es.html</small></span></label>
+        </section>
+        <section class="export-section">
+          <h3 data-i18n="selectionTools">选择工具</h3>
+          <div class="stacked-actions"><button id="selectAll" data-i18n="selectAll">全选 30 套模板</button><button id="selectCurrentGroup" data-i18n="selectGroup">选择当前用途</button><button id="clearExport" data-i18n="clearAll">全部清除</button></div>
+        </section>
+        <div class="source-note"><span>✓</span><p><strong data-i18n="sourceFiles">导出源文件</strong><br /><span data-i18n="sourceNote">不包含 Sample Data，保留全部 ${variables}。</span></p></div>
+        <button class="download-button" id="downloadButton"><span>↓</span><span><b data-i18n="downloadZip">下载 ZIP</b><small id="downloadDetail">0 files</small></span></button>
+        <p class="export-footnote" data-i18n="zipStructure">ZIP 按“模板 ID / 语言”组织，方便二次编辑与系统部署。</p>
+      </aside>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
