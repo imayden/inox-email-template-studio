@@ -24,7 +24,7 @@ src/templates/MAIL_0443708729/template.html
 
 ```html
 <template data-language="zh">
-  <!-- @subject INOX Smart 访问码已创建 -->
+  <!-- @subject INOX Smart 访问密码已创建 -->
   中文正文
 </template>
 
@@ -60,7 +60,7 @@ src/shared/email.css
 文件顶部 `:root` 是全局设计变量。例如修改全部模板的品牌主色：
 
 ```css
---email-primary: #7fc344;
+--email-primary: #80C41C;
 ```
 
 下面的 `.promo-*` 和 `.footer-*` 是 App 宣传区与 Footer 的公共样式。修改并构建后，脚本会把 CSS 自动内联到全部 90 个最终文件中，保证邮件客户端兼容性。

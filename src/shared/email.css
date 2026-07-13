@@ -6,7 +6,7 @@
   --email-canvas: #e6e6e6;
   --email-card: #f5f5f5;
   --email-text: #333333;
-  --email-primary: #80C41C; /*#7fc344; */
+  --email-primary: #80C41C; /*#80C41C; */
   --email-primary-dark:#80C41C; /*#77b739; */
   --email-divider: #80C41C; /*#6cc24a; */
   --email-footer: #414141;
@@ -86,6 +86,51 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
+}
+
+.access-scope-list {
+  display: block;
+  margin: 5px 0 8px 0;
+}
+
+.access-scope-row {
+  display: block;
+  margin: 0 0 5px 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.access-scope-bullet {
+  display: inline-block;
+  width: 14px;
+  color: #333333;
+}
+
+.access-scope-unit {
+  display: inline-block;
+  margin: 0 7px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+  font-weight: normal;
+  color: #333333;
+}
+
+.access-device-tags {
+  display: inline;
+}
+
+.access-device-tag {
+  display: inline-block;
+  margin: 0 5px 3px 0;
+  padding: 2px 7px;
+  background-color: #eff8e9;
+  border: 1px solid #a8d46f;
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: normal;
+  color: #477c24;
+  white-space: nowrap;
 }
 
 .email-footer {

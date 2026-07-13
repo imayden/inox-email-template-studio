@@ -7,6 +7,8 @@ const state = {
   manifest: { groups: [], templates: [] }, filterGroup: 'all', query: '', selected: new Set(),
   previewId: null, previewLanguage: 'zh', sampleData: true, viewport: 'desktop', cache: new Map(), exportLanguages: new Set(['zh', 'en', 'es']),
 };
+const previewLanguages = new Set(['zh', 'en', 'es']);
+let lastAppliedRoute = null;
 
 const messages = {
   zh: {
@@ -37,10 +39,97 @@ const sampleValues = {
   plan_name: 'INOX Smart Pro', effective_date: 'June 15, 2026', requester_name: 'Alex Chen', requester_email: 'alex@example.com',
   manager_name: 'Morgan Lee', manager_email: 'morgan@example.com', contact_name: 'Jordan Kim', contact_email: 'billing@example.com',
 };
+const sampleAuthorizedUnits = [
+  { unitName: 'Unit 1208', devices: ['Main Door', 'Rear Door'] },
+  { unitName: 'Unit 1004', devices: ['Front Door'] },
+];
 const escapeHtml = (value = '') => String(value).replace(/[&<>"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[character]);
 const templateName = (template) => template.name[state.locale] || template.name.en;
 const templateScenario = (template) => template.scenario[state.locale] || template.scenario.en;
 const groupName = (group) => group[state.locale] || group.en;
+
+function readPreviewRoute() {
+  const match = location.hash.match(/^#\/group\/([^/]+)\/template\/([^/]+)(?:\/(zh|en|es))?\/?$/i);
+  const legacyMatch = location.hash.match(/^#\/template\/([^/]+)(?:\/(zh|en|es))?\/?$/i);
+  if (!match && !legacyMatch) return null;
+  try {
+    return match
+      ? { groupId: decodeURIComponent(match[1]), templateId: decodeURIComponent(match[2]), language: (match[3] || 'zh').toLowerCase() }
+      : { groupId: null, templateId: decodeURIComponent(legacyMatch[1]), language: (legacyMatch[2] || 'zh').toLowerCase() };
+  } catch {
+    return null;
+  }
+}
+
+function previewRouteHash(groupId, templateId, language) {
+  return `#/group/${encodeURIComponent(groupId)}/template/${encodeURIComponent(templateId)}/${language}`;
+}
+
+function knownGroup(groupId) {
+  return groupId === 'all' || state.manifest.groups.some((group) => group.id === groupId);
+}
+
+function resolvePreviewRoute(route) {
+  const fallbackTemplate = state.manifest.templates[0];
+  if (!route) return { groupId: 'all', template: fallbackTemplate, language: 'zh' };
+
+  let groupId = knownGroup(route.groupId) ? route.groupId : null;
+  let template = state.manifest.templates.find((item) => item.id === route.templateId);
+  if (groupId && groupId !== 'all' && (!template || !template.groups.includes(groupId))) {
+    template = groupMembers(groupId)[0] || template;
+  }
+  template ||= fallbackTemplate;
+  if (groupId && groupId !== 'all' && !template.groups.includes(groupId)) groupId = null;
+  if (!groupId) groupId = template.groups[0] || 'all';
+  const language = previewLanguages.has(route.language) && template.languages.includes(route.language) ? route.language : template.languages[0];
+  return { groupId, template, language };
+}
+
+function syncPreviewLanguageTabs() {
+  $$('#languageTabs button').forEach((button) => {
+    const active = button.dataset.language === state.previewLanguage;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+}
+
+function navigatePreview(templateId, language = state.previewLanguage, { groupId = state.filterGroup, replace = false } = {}) {
+  const template = state.manifest.templates.find((item) => item.id === templateId);
+  if (!template) return false;
+  const nextLanguage = previewLanguages.has(language) && template.languages.includes(language) ? language : template.languages[0];
+  const nextGroup = knownGroup(groupId) && (groupId === 'all' || template.groups.includes(groupId)) ? groupId : (template.groups[0] || 'all');
+  const nextHash = previewRouteHash(nextGroup, template.id, nextLanguage);
+
+  state.filterGroup = nextGroup;
+  state.previewId = template.id;
+  state.previewLanguage = nextLanguage;
+  if (location.hash !== nextHash) {
+    const nextUrl = `${location.pathname}${location.search}${nextHash}`;
+    history[replace ? 'replaceState' : 'pushState']({}, '', nextUrl);
+  }
+  lastAppliedRoute = nextHash;
+  syncPreviewLanguageTabs();
+  renderAll();
+  renderPreview();
+  return true;
+}
+
+function navigateGroup(groupId) {
+  if (!knownGroup(groupId)) return;
+  const members = groupMembers(groupId);
+  const nextTemplate = members.find((template) => template.id === state.previewId) || members[0];
+  if (nextTemplate) navigatePreview(nextTemplate.id, state.previewLanguage, { groupId });
+}
+
+function restorePreviewFromRoute() {
+  if (!state.manifest.templates.length || location.hash === lastAppliedRoute) return;
+  const resolved = resolvePreviewRoute(readPreviewRoute());
+  const canonicalHash = previewRouteHash(resolved.groupId, resolved.template.id, resolved.language);
+  navigatePreview(resolved.template.id, resolved.language, {
+    groupId: resolved.groupId,
+    replace: location.hash !== canonicalHash,
+  });
+}
 
 function toast(message) { const element = $('#toast'); element.textContent = message; element.classList.add('show'); clearTimeout(toast.timer); toast.timer = setTimeout(() => element.classList.remove('show'), 1800); }
 function currentTemplate() { return state.manifest.templates.find((template) => template.id === state.previewId); }
@@ -61,7 +150,32 @@ async function fetchHtml(id, language) {
   }));
   return state.cache.get(key);
 }
-function withSampleData(html) { return html.replace(/\$\{([^}]+)\}/g, (_, name) => sampleValues[name] ?? `[${name}]`); }
+function withSampleData(html) {
+  let rendered = html;
+  if (html.includes('data-access-scope-list')) {
+    const parsed = new DOMParser().parseFromString(html, 'text/html');
+    parsed.querySelectorAll('[data-access-scope-list]').forEach((scope) => {
+      const rowTemplate = scope.querySelector('[data-access-scope-row]');
+      const tagTemplate = rowTemplate?.querySelector('[data-access-device-tag]');
+      if (!rowTemplate || !tagTemplate) return;
+
+      const rows = sampleAuthorizedUnits.map((unit) => {
+        const row = rowTemplate.cloneNode(true);
+        row.querySelector('[data-access-scope-unit]').textContent = `${unit.unitName}:`;
+        const tags = row.querySelector('[data-access-device-tags]');
+        tags.replaceChildren(...unit.devices.map((deviceName) => {
+          const tag = tagTemplate.cloneNode(true);
+          tag.textContent = deviceName;
+          return tag;
+        }));
+        return row;
+      });
+      scope.replaceChildren(...rows);
+    });
+    rendered = `<!DOCTYPE html>\n${parsed.documentElement.outerHTML}`;
+  }
+  return rendered.replace(/\$\{([^}]+)\}/g, (_, name) => sampleValues[name] ?? `[${name}]`);
+}
 
 function applyLocale(locale) {
   state.locale = locale; localStorage.setItem('inox-studio-locale', locale); document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
@@ -85,7 +199,7 @@ function renderGroups() {
     const members = groupMembers(row.dataset.group); const selectedCount = members.filter((template) => state.selected.has(template.id)).length;
     const checkbox = row.querySelector('input'); checkbox.indeterminate = selectedCount > 0 && selectedCount < members.length;
     checkbox.addEventListener('change', () => { members.forEach((template) => checkbox.checked ? state.selected.add(template.id) : state.selected.delete(template.id)); renderAll(); });
-    row.querySelector('.group-filter').addEventListener('click', () => { state.filterGroup = row.dataset.group; renderAll(); });
+    row.querySelector('.group-filter').addEventListener('click', () => navigateGroup(row.dataset.group));
   });
 }
 
@@ -98,13 +212,14 @@ function renderTemplates() {
   </div>`).join('') : `<div class="empty">${t('noMatches')}</div>`;
   $$('#templateList .template-row').forEach((row) => {
     row.querySelector('input').addEventListener('change', (event) => { event.target.checked ? state.selected.add(row.dataset.id) : state.selected.delete(row.dataset.id); renderAll(); });
-    row.querySelector('.template-open').addEventListener('click', () => { state.previewId = row.dataset.id; renderAll(); renderPreview(); });
+    row.querySelector('.template-open').addEventListener('click', () => navigatePreview(row.dataset.id));
   });
 }
 
 function renderTemplateMeta() {
   const template = currentTemplate(); if (!template) return;
   $('#templateId').textContent = template.id; $('#templateName').textContent = templateName(template); $('#templateScenario').textContent = templateScenario(template);
+  document.title = `${templateName(template)} · INOX Email Template Studio`;
   $('#groupBadges').innerHTML = template.groups.map((id) => {
     const group = state.manifest.groups.find((item) => item.id === id); return `<span class="group-badge">${escapeHtml(groupName(group))}</span>`;
   }).join('');
@@ -145,7 +260,7 @@ function bindEvents() {
   $('#searchInput').addEventListener('input', (event) => { state.query = event.target.value; renderAll(); });
   document.addEventListener('keydown', (event) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); $('#searchInput').focus(); } });
   $$('#uiLocaleTabs button').forEach((button) => button.addEventListener('click', () => applyLocale(button.dataset.locale)));
-  $$('#languageTabs button').forEach((button) => button.addEventListener('click', () => { state.previewLanguage = button.dataset.language; $$('#languageTabs button').forEach((item) => item.classList.toggle('active', item === button)); renderPreview(); }));
+  $$('#languageTabs button').forEach((button) => button.addEventListener('click', () => navigatePreview(state.previewId, button.dataset.language)));
   $('#sampleToggle').addEventListener('change', (event) => { state.sampleData = event.target.checked; renderPreview(); });
   $$('#viewportTabs button').forEach((button) => button.addEventListener('click', () => { state.viewport = button.dataset.viewport; $$('#viewportTabs button').forEach((item) => item.classList.toggle('active', item === button)); $('#emailCanvas').classList.toggle('mobile', state.viewport === 'mobile'); }));
   $('#selectVisible').addEventListener('click', () => { filteredTemplates().forEach((template) => state.selected.add(template.id)); renderAll(); });
@@ -157,13 +272,20 @@ function bindEvents() {
   $('#downloadButton').addEventListener('click', downloadSelected);
   $('#copyHtml').addEventListener('click', async () => { await navigator.clipboard.writeText(await fetchHtml(state.previewId, state.previewLanguage)); toast(t('copied')); });
   $('#openPreview').addEventListener('click', async () => { const raw = await fetchHtml(state.previewId, state.previewLanguage); const url = URL.createObjectURL(new Blob([state.sampleData ? withSampleData(raw) : raw], { type: 'text/html' })); window.open(url, '_blank', 'noopener,noreferrer'); setTimeout(() => URL.revokeObjectURL(url), 30000); });
+  window.addEventListener('popstate', restorePreviewFromRoute);
+  window.addEventListener('hashchange', restorePreviewFromRoute);
 }
 
 async function init() {
   bindEvents();
   try {
-    const response = await fetch('manifest.json'); state.manifest = await response.json(); state.previewId = state.manifest.templates[0]?.id;
-    applyLocale(state.locale); renderPreview();
+    const response = await fetch('manifest.json'); state.manifest = await response.json();
+    const resolved = resolvePreviewRoute(readPreviewRoute());
+    state.filterGroup = resolved.groupId;
+    state.previewId = resolved.template.id;
+    state.previewLanguage = resolved.language;
+    applyLocale(state.locale);
+    navigatePreview(state.previewId, state.previewLanguage, { groupId: state.filterGroup, replace: true });
   } catch (error) { toast(error.message); }
 }
 init();

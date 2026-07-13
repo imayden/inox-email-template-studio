@@ -2,8 +2,8 @@
   "groups": [
     {
       "id": "access-codes",
-      "zh": "Access Codes 访问密码",
-      "en": "Access Codes"
+      "zh": "Passcodes 访问密码",
+      "en": "Passcodes"
     },
     {
       "id": "e-keys",
@@ -426,8 +426,8 @@
       "order": 19,
       "id": "MAIL_6746979993",
       "name": {
-        "zh": "创建随机(带有效期)临时密码",
-        "en": "Random Temporary Code (Expiring)"
+        "zh": "系统生成访问密码（有有效期）",
+        "en": "System-Generated Passcode (Expiring)"
       },
       "scenario": {
         "zh": "给用户创建随机的带有效期的临时密码后，邮件告知用户具体密码、密码可以打开哪个设备、以及密码有效期信息",
@@ -446,8 +446,8 @@
       "order": 20,
       "id": "MAIL_5258590677",
       "name": {
-        "zh": "创建随机(永久)临时密码",
-        "en": "Random Temporary Code (Permanent)"
+        "zh": "系统生成访问密码（永久）",
+        "en": "System-Generated Passcode (Permanent)"
       },
       "scenario": {
         "zh": "给用户创建随机的永久临时密码后，邮件告知用户具体密码以及密码可以打开哪个设备",
@@ -466,8 +466,8 @@
       "order": 21,
       "id": "MAIL_9074381975",
       "name": {
-        "zh": "创建自定义(带有效期)临时密码",
-        "en": "Custom Temporary Code (Expiring)"
+        "zh": "用户自定义访问密码（有有效期）",
+        "en": "User-Defined Passcode (Expiring)"
       },
       "scenario": {
         "zh": "给用户创建自定义的带有效期的临时密码后，邮件告知用户具体密码、密码可以打开哪个设备、以及密码有效期信息",
@@ -486,8 +486,8 @@
       "order": 22,
       "id": "MAIL_0443708729",
       "name": {
-        "zh": "创建自定义(永久)临时密码",
-        "en": "Custom Temporary Code (Permanent)"
+        "zh": "用户自定义访问密码（永久）",
+        "en": "User-Defined Passcode (Permanent)"
       },
       "scenario": {
         "zh": "给用户创建自定义的永久临时密码后，邮件告知用户具体密码、密码可以打开哪个设备",
@@ -506,8 +506,8 @@
       "order": 23,
       "id": "MAIL_0545773117",
       "name": {
-        "zh": "创建随机(一次性)临时密码",
-        "en": "Random One-Time Code"
+        "zh": "一次性访问密码",
+        "en": "One-Time Passcode"
       },
       "scenario": {
         "zh": "给用户创建随机的一次性临时密码后，邮件告知用户具体密码、密码可以打开哪个设备",

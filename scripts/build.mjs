@@ -64,7 +64,7 @@ function applySharedTheme(content, variables) {
     ['#e6e6e6', variables['--email-canvas']],
     ['#f5f5f5', variables['--email-card']],
     ['#333333', variables['--email-text']],
-    ['#7fc344', variables['--email-primary']],
+    ['#80C41C', variables['--email-primary']],
     ['#77b739', variables['--email-primary-dark']],
     ['#6cc24a', variables['--email-divider']],
     ['#414141', variables['--email-footer']],
