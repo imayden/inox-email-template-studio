@@ -39,6 +39,10 @@ const sampleValues = {
   plan_name: 'INOX Smart Pro', effective_date: 'June 15, 2026', requester_name: 'Alex Chen', requester_email: 'alex@example.com',
   manager_name: 'Morgan Lee', manager_email: 'morgan@example.com', contact_name: 'Jordan Kim', contact_email: 'billing@example.com',
 };
+const templateSampleValues = {
+  MAIL_0093089911: { unitName: 'Unit 1208, Unit 1003' },
+  MAIL_5310808349: { unitName: 'Unit 1208, Unit 1003' },
+};
 const sampleAuthorizedUnits = [
   { unitName: 'Unit 1208', devices: ['Main Door', 'Rear Door'] },
   { unitName: 'Unit 1004', devices: ['Front Door'] },
@@ -158,7 +162,8 @@ function withPreviewAssets(html) {
   return html.replaceAll(deployedAssets, localAssets);
 }
 
-function withSampleData(html) {
+function withSampleData(html, templateId = state.previewId) {
+  const values = { ...sampleValues, ...(templateSampleValues[templateId] || {}) };
   let rendered = html;
   if (html.includes('data-access-scope-list') || html.includes('data-validity-period')) {
     const parsed = new DOMParser().parseFromString(html, 'text/html');
@@ -181,16 +186,16 @@ function withSampleData(html) {
       scope.replaceChildren(...rows);
     });
 
-    const validityIsPermanent = [sampleValues.startTime, sampleValues.endTime]
+    const validityIsPermanent = [values.startTime, values.endTime]
       .some((value) => String(value).trim().toLowerCase() === 'permanent');
     parsed.querySelectorAll('[data-validity-period]').forEach((period) => {
       period.textContent = validityIsPermanent
         ? period.dataset.permanentLabel
-        : `${sampleValues.startTime} — ${sampleValues.endTime}`;
+        : `${values.startTime} — ${values.endTime}`;
     });
     rendered = `<!DOCTYPE html>\n${parsed.documentElement.outerHTML}`;
   }
-  return rendered.replace(/\$\{([^}]+)\}/g, (_, name) => sampleValues[name] ?? `[${name}]`);
+  return rendered.replace(/\$\{([^}]+)\}/g, (_, name) => values[name] ?? `[${name}]`);
 }
 
 function applyLocale(locale) {
@@ -254,7 +259,7 @@ async function renderPreview() {
   try {
     const raw = await fetchHtml(template.id, state.previewLanguage); if (state.previewId !== template.id) return;
     const preview = withPreviewAssets(raw);
-    $('#emailFrame').srcdoc = state.sampleData ? withSampleData(preview) : preview;
+    $('#emailFrame').srcdoc = state.sampleData ? withSampleData(preview, template.id) : preview;
   } catch (error) { toast(error.message); }
 }
 
@@ -288,7 +293,7 @@ function bindEvents() {
   $$('.language-choice input').forEach((input) => input.addEventListener('change', () => { input.checked ? state.exportLanguages.add(input.value) : state.exportLanguages.delete(input.value); renderExportSummary(); }));
   $('#downloadButton').addEventListener('click', downloadSelected);
   $('#copyHtml').addEventListener('click', async () => { await navigator.clipboard.writeText(await fetchHtml(state.previewId, state.previewLanguage)); toast(t('copied')); });
-  $('#openPreview').addEventListener('click', async () => { const raw = withPreviewAssets(await fetchHtml(state.previewId, state.previewLanguage)); const url = URL.createObjectURL(new Blob([state.sampleData ? withSampleData(raw) : raw], { type: 'text/html' })); window.open(url, '_blank', 'noopener,noreferrer'); setTimeout(() => URL.revokeObjectURL(url), 30000); });
+  $('#openPreview').addEventListener('click', async () => { const raw = withPreviewAssets(await fetchHtml(state.previewId, state.previewLanguage)); const url = URL.createObjectURL(new Blob([state.sampleData ? withSampleData(raw, state.previewId) : raw], { type: 'text/html' })); window.open(url, '_blank', 'noopener,noreferrer'); setTimeout(() => URL.revokeObjectURL(url), 30000); });
   window.addEventListener('popstate', restorePreviewFromRoute);
   window.addEventListener('hashchange', restorePreviewFromRoute);
 }
