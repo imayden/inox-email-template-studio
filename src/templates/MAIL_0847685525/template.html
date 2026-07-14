@@ -3,7 +3,7 @@
 <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">邀请注册</h1>
           <p style="margin:0 0 16px 0; font-size:16px; line-height:1.5;"><strong>${userName}，您好：</strong></p>
           <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">您受邀创建 INOX Smart 账户。注册完成后，您可以访问本次邀请关联的物业和单元。</p>
-          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>邀请人：</strong> ${inviterName}(${email})<br /><strong>物业：</strong> ${propertyName}<br /><strong>注册链接：</strong> ${link}<br /><strong>链接有效期：</strong> ${startTime} &mdash; ${endTime}</p>
+          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>邀请人：</strong> ${inviterName}(<a href="mailto:${email}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${email}</a>)<br /><strong>物业：</strong> ${propertyName}<br /><strong>注册链接：</strong> <a href="${link}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${link}</a><br /><strong>链接有效期：</strong> ${startTime} &mdash; ${endTime}</p>
           <div style="height:26px; line-height:26px; font-size:0;">&nbsp;</div>
           <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7; color:#333333;">重要提示：此注册链接仅在上述有效期内可用。如无法在链接失效前完成注册，请联系邀请人。如果您不是此邮件的预期收件人，请忽略此邮件。</p>
 </template>
@@ -13,7 +13,7 @@
 <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">You’re invited to register</h1>
           <p style="margin:0 0 16px 0; font-size:16px; line-height:1.5;"><strong>Hello ${userName},</strong></p>
           <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">You have been invited to create an INOX Smart account. Once registered, you can access the property and unit(s) associated with this invitation.</p>
-          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>Inviter:</strong> ${inviterName}(${email})<br /><strong>Property:</strong> ${propertyName}<br /><strong>Registration Link:</strong> ${link}<br /><strong>Link validity period:</strong> ${startTime} &mdash; ${endTime}</p>
+          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>Inviter:</strong> ${inviterName}(<a href="mailto:${email}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${email}</a>)<br /><strong>Property:</strong> ${propertyName}<br /><strong>Registration Link:</strong> <a href="${link}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${link}</a><br /><strong>Link validity period:</strong> ${startTime} &mdash; ${endTime}</p>
           <div style="height:26px; line-height:26px; font-size:0;">&nbsp;</div>
           <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7; color:#333333;">Important: This registration link is valid only during the period shown above. If you cannot complete registration before it expires, please contact the inviter. If you are not the intended recipient of this email, please disregard it.</p>
 </template>
@@ -23,7 +23,7 @@
 <h1 style="margin:0 0 24px 0; font-size:32px; line-height:1.2; color:#80C41C; font-weight:bold;">Invitación para registrarte</h1>
           <p style="margin:0 0 16px 0; font-size:16px; line-height:1.5;"><strong>Hola, ${userName}:</strong></p>
           <p style="margin:0 0 20px 0; font-size:14px; line-height:1.6; color:#333333;">Se te ha invitado a crear una cuenta de INOX Smart. Una vez registrado, podrás acceder a la propiedad y a la unidad o las unidades asociadas a esta invitación.</p>
-          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>Invitador:</strong> ${inviterName}(${email})<br /><strong>Propiedad:</strong> ${propertyName}<br /><strong>Enlace de registro:</strong> ${link}<br /><strong>Periodo de validez del enlace:</strong> ${startTime} &mdash; ${endTime}</p>
+          <p style="margin:0; font-size:14px; line-height:1.8; color:#333333;"><strong>Invitador:</strong> ${inviterName}(<a href="mailto:${email}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${email}</a>)<br /><strong>Propiedad:</strong> ${propertyName}<br /><strong>Enlace de registro:</strong> <a href="${link}" target="_blank" rel="noopener noreferrer" style="color:#80C41C; text-decoration:underline;">${link}</a><br /><strong>Periodo de validez del enlace:</strong> ${startTime} &mdash; ${endTime}</p>
           <div style="height:26px; line-height:26px; font-size:0;">&nbsp;</div>
           <p style="margin:0 0 22px 0; font-size:14px; line-height:1.7; color:#333333;">Importante: este enlace de registro solo es válido durante el periodo indicado. Si no puedes registrarte antes de que venza, ponte en contacto con la persona que te invitó. Si no eres la persona destinataria de este correo, ignóralo.</p>
 </template>
