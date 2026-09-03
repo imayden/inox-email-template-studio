@@ -12,7 +12,9 @@ const indexHtml = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
 const appJs = fs.readFileSync(path.join(root, 'web', 'app.js'), 'utf8');
 const componentsHtml = fs.readFileSync(path.join(sourceRoot, 'shared', 'components.html'), 'utf8');
 const sharedCss = fs.readFileSync(path.join(sourceRoot, 'shared', 'email.css'), 'utf8');
-const requiredAssets = ['app-store-download.png', 'google-play-download.png'];
+const layoutHtml = fs.readFileSync(path.join(sourceRoot, 'shared', 'layout.html'), 'utf8');
+const sharedAssets = JSON.parse(fs.readFileSync(path.join(sourceRoot, 'shared', 'assets.json'), 'utf8'));
+const requiredAssets = ['app-icon.png', 'app-store-download.png', 'google-play-download.png', 'inox-smart-logo.png'];
 const indexIds = new Set([...indexHtml.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
 const referencedIds = new Set([...appJs.matchAll(/\$\('#([A-Za-z][\w:-]*)[^']*'\)/g)].map((match) => match[1]));
 
@@ -22,6 +24,15 @@ if (/\sstyle=/.test(componentsHtml)) issues.push('shared/components.html contain
 if (!/:root\s*\{/.test(sharedCss)) issues.push('shared/email.css is missing :root design variables');
 if (!/sandbox="[^"]*allow-popups-to-escape-sandbox/.test(indexHtml)) issues.push('preview iframe popups remain inside the sandbox');
 if (!/\blink:\s*'https:\/\/[^']+'/.test(appJs)) issues.push('sample ${link} must use HTTPS');
+if (!/@media only screen and \(max-width: 480px\)/.test(layoutHtml)) issues.push('shared layout is missing the mobile email breakpoint');
+if (!/data-promo-mobile-badges/.test(componentsHtml) || !/data-promo-desktop-badges/.test(componentsHtml)) {
+  issues.push('shared app promotion is missing responsive desktop/mobile variants');
+}
+for (const key of ['appIcon', 'appStoreBadge', 'googlePlayBadge', 'logo']) {
+  if (!sharedAssets[key]?.startsWith('https://inox-smart-email-template-studio.netlify.app/assets/')) {
+    issues.push(`${key}: email image must use the project-managed HTTPS asset host`);
+  }
+}
 for (const asset of requiredAssets) {
   if (!fs.existsSync(path.join(root, 'web', 'assets', asset))) issues.push(`missing web asset: web/assets/${asset}`);
   if (!fs.existsSync(path.join(root, 'dist', 'assets', asset))) issues.push(`missing deployed asset: dist/assets/${asset}`);
@@ -99,6 +110,13 @@ for (const template of manifest.templates) {
     if (/class=|data-asset-|__[A-Z_]+__|@slot:|var\(--/.test(html)) issues.push(`${template.id}/${language}: unresolved build source markup`);
     if (/<img[^>]*\/\s+style=/.test(html)) issues.push(`${template.id}/${language}: malformed self-closing image`);
     if (!html.includes('${')) issues.push(`${template.id}/${language}: no business variables found`);
+    if (!/@media only screen and \(max-width: 480px\)/.test(html)) issues.push(`${template.id}/${language}: missing responsive email styles`);
+    if (!/data-promo-mobile-badges/.test(html) || !/data-promo-desktop-badges/.test(html)) {
+      issues.push(`${template.id}/${language}: missing responsive app promotion markup`);
+    }
+    if (/images\.tuyaus\.com|static\.wixstatic\.com|mzstatic\.com/.test(html)) {
+      issues.push(`${template.id}/${language}: contains a third-party image host`);
+    }
     for (const [index, match] of [...html.matchAll(/<a\b[^>]*>/g)].entries()) {
       const anchor = match[0];
       if (!/target="_blank"/.test(anchor) || !/rel="noopener noreferrer"/.test(anchor)) {

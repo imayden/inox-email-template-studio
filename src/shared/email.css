@@ -25,7 +25,10 @@
 
 .email-outer {
   background-color: var(--email-canvas);
-  padding: 20px 0;
+}
+
+.email-shell {
+  padding: 24px 12px;
 }
 
 .email-card {
@@ -41,12 +44,15 @@
   color: var(--email-text);
 }
 
-.shared-divider {
-  border-top: 2px solid var(--email-divider);
-  margin: 24px 0;
+.promo-table {
+  width: 100%;
 }
 
-.promo-table {
+.promo-main-cell {
+  vertical-align: middle;
+}
+
+.promo-main-table {
   width: 100%;
 }
 
@@ -59,6 +65,7 @@
   display: block;
   border: 0;
   max-width: 72px;
+  border-radius: 14px;
 }
 
 .promo-copy-cell {
@@ -119,6 +126,37 @@
   font-size: 0;
 }
 
+.promo-mobile-learn {
+  display: none;
+}
+
+.promo-mobile-learn-cell {
+  padding: 18px 0 14px 0;
+  font-family: var(--font-system);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.promo-mobile-badges {
+  display: none;
+}
+
+.promo-mobile-badges-table {
+  width: 100%;
+}
+
+.promo-mobile-badge-cell {
+  width: 50%;
+}
+
+.promo-mobile-store-badge {
+  display: block;
+  width: 145px;
+  max-width: 95%;
+  height: auto;
+  border: 0;
+}
+
 .access-scope-list {
   display: block;
   margin: 5px 0 8px 0;
@@ -173,19 +211,20 @@
 }
 
 .footer-logo-wrap {
-  margin-bottom: 12px;
+  margin: 0;
 }
 
 .footer-logo {
-  max-width: 160px;
+  width: 166px;
+  max-width: 80%;
   height: auto;
   border: 0;
 }
 
 .footer-brand {
-  margin: 0 0 6px 0;
+  margin: 12px 0 7px 0;
   font-size: 11px;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .footer-support {

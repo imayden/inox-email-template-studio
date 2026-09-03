@@ -4,14 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>__SUBJECT__</title>
+  <style type="text/css">
+    @media only screen and (max-width: 480px) {
+      table[data-email-card] { width: 100% !important; }
+      td[data-email-content] { padding: 28px 20px !important; }
+      td[data-email-content] h1 { font-size: 26px !important; }
+      [data-promo-desktop-badges], [data-promo-desktop-learn] { display: none !important; }
+      tr[data-promo-mobile-learn], tr[data-promo-mobile-badges] { display: table-row !important; }
+      td[data-email-footer] { padding: 24px 20px !important; }
+    }
+  </style>
 </head>
 <body class="email-body">
   <table class="email-outer" width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
     <tr>
-      <td align="center">
-        <table class="email-card" width="__EMAIL_WIDTH__" border="0" cellspacing="0" cellpadding="0" role="presentation">
+      <td class="email-shell" align="center">
+        <table class="email-card" data-email-card width="__EMAIL_WIDTH__" border="0" cellspacing="0" cellpadding="0" role="presentation">
           <tr>
-            <td class="email-content">
+            <td class="email-content" data-email-content>
 <!-- @slot:content -->
 <!-- @slot:app-promo -->
             </td>
