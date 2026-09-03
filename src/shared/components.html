@@ -1,63 +1,117 @@
 <!-- 通用组件集中在本文件；构建脚本会按 data-component 和 data-language 选择内容。 -->
 
 <template data-component="app-promo" data-language="zh">
-  <div class="shared-divider"></div>
   <table class="promo-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
     <tr>
-      <td class="promo-icon-cell" valign="middle" width="78">
-        <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+      <td class="promo-main-cell" valign="middle">
+        <table class="promo-main-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-icon-cell" valign="middle" width="78">
+              <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+            </td>
+            <td class="promo-copy-cell" valign="middle">
+              <p class="promo-title">轻松管理门禁！</p>
+              <p class="promo-lead">下载 INOX Smart App，轻松管理门禁。</p>
+              <p class="promo-note" data-promo-desktop-learn><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">了解 INOX Smart App</a></p>
+            </td>
+          </tr>
+        </table>
       </td>
-      <td class="promo-copy-cell" valign="middle">
-        <p class="promo-title">轻松管理门禁！</p>
-        <p class="promo-lead">下载 INOX Smart App，轻松管理门禁。</p>
-        <p class="promo-note"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">了解 INOX Smart App</a></p>
-      </td>
-      <td class="promo-badges-cell" valign="middle" width="100">
+      <td class="promo-badges-cell" data-promo-desktop-badges valign="middle" width="100">
         <a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="appStoreBadge" alt="在 App Store 下载" width="100" /></a>
         <div class="promo-badge-spacer"></div>
         <a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="googlePlayBadge" alt="在 Google Play 下载" width="100" /></a>
+      </td>
+    </tr>
+    <tr class="promo-mobile-learn" data-promo-mobile-learn>
+      <td class="promo-mobile-learn-cell" colspan="2" align="center"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">了解 INOX Smart App</a></td>
+    </tr>
+    <tr class="promo-mobile-badges" data-promo-mobile-badges>
+      <td colspan="2">
+        <table class="promo-mobile-badges-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="appStoreBadge" alt="在 App Store 下载" width="145" /></a></td>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="googlePlayBadge" alt="在 Google Play 下载" width="145" /></a></td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>
 </template>
 
 <template data-component="app-promo" data-language="en">
-  <div class="shared-divider"></div>
   <table class="promo-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
     <tr>
-      <td class="promo-icon-cell" valign="middle" width="78">
-        <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+      <td class="promo-main-cell" valign="middle">
+        <table class="promo-main-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-icon-cell" valign="middle" width="78">
+              <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+            </td>
+            <td class="promo-copy-cell" valign="middle">
+              <p class="promo-title">Access Management Made Easy!</p>
+              <p class="promo-lead">Download the INOX Smart App to manage access.</p>
+              <p class="promo-note" data-promo-desktop-learn><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Learn more about the INOX Smart App</a></p>
+            </td>
+          </tr>
+        </table>
       </td>
-      <td class="promo-copy-cell" valign="middle">
-        <p class="promo-title">Access Management Made Easy!</p>
-        <p class="promo-lead">Download the INOX Smart App to manage access.</p>
-        <p class="promo-note"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Learn more about the INOX Smart App</a></p>
-      </td>
-      <td class="promo-badges-cell" valign="middle" width="100">
+      <td class="promo-badges-cell" data-promo-desktop-badges valign="middle" width="100">
         <a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="appStoreBadge" alt="Download on the App Store" width="100" /></a>
         <div class="promo-badge-spacer"></div>
         <a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="googlePlayBadge" alt="Get it on Google Play" width="100" /></a>
+      </td>
+    </tr>
+    <tr class="promo-mobile-learn" data-promo-mobile-learn>
+      <td class="promo-mobile-learn-cell" colspan="2" align="center"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Learn more about the INOX Smart App</a></td>
+    </tr>
+    <tr class="promo-mobile-badges" data-promo-mobile-badges>
+      <td colspan="2">
+        <table class="promo-mobile-badges-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="appStoreBadge" alt="Download on the App Store" width="145" /></a></td>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="googlePlayBadge" alt="Get it on Google Play" width="145" /></a></td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>
 </template>
 
 <template data-component="app-promo" data-language="es">
-  <div class="shared-divider"></div>
   <table class="promo-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
     <tr>
-      <td class="promo-icon-cell" valign="middle" width="78">
-        <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+      <td class="promo-main-cell" valign="middle">
+        <table class="promo-main-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-icon-cell" valign="middle" width="78">
+              <img class="promo-icon" data-asset-src="appIcon" alt="INOX Smart App" width="72" height="72" />
+            </td>
+            <td class="promo-copy-cell" valign="middle">
+              <p class="promo-title">¡Gestiona accesos fácilmente!</p>
+              <p class="promo-lead">Descarga INOX Smart App y gestiona tus accesos.</p>
+              <p class="promo-note" data-promo-desktop-learn><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Conoce INOX Smart App</a></p>
+            </td>
+          </tr>
+        </table>
       </td>
-      <td class="promo-copy-cell" valign="middle">
-        <p class="promo-title">¡Gestiona accesos fácilmente!</p>
-        <p class="promo-lead">Descarga INOX Smart App y gestiona tus accesos.</p>
-        <p class="promo-note"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Conoce INOX Smart App</a></p>
-      </td>
-      <td class="promo-badges-cell" valign="middle" width="100">
+      <td class="promo-badges-cell" data-promo-desktop-badges valign="middle" width="100">
         <a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="appStoreBadge" alt="Descargar en App Store" width="100" /></a>
         <div class="promo-badge-spacer"></div>
         <a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-store-badge" data-asset-src="googlePlayBadge" alt="Disponible en Google Play" width="100" /></a>
+      </td>
+    </tr>
+    <tr class="promo-mobile-learn" data-promo-mobile-learn>
+      <td class="promo-mobile-learn-cell" colspan="2" align="center"><a class="promo-link" data-asset-href="appLearnMoreUrl" target="_blank" rel="noopener noreferrer">Conoce INOX Smart App</a></td>
+    </tr>
+    <tr class="promo-mobile-badges" data-promo-mobile-badges>
+      <td colspan="2">
+        <table class="promo-mobile-badges-table" border="0" cellspacing="0" cellpadding="0" width="100%" role="presentation">
+          <tr>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="appStoreUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="appStoreBadge" alt="Descargar en App Store" width="145" /></a></td>
+            <td class="promo-mobile-badge-cell" width="50%" align="center"><a class="promo-badge-link" data-asset-href="googlePlayUrl" target="_blank" rel="noopener noreferrer"><img class="promo-mobile-store-badge" data-asset-src="googlePlayBadge" alt="Disponible en Google Play" width="145" /></a></td>
+          </tr>
+        </table>
       </td>
     </tr>
   </table>
@@ -65,33 +119,33 @@
 
 <template data-component="footer" data-language="zh">
   <tr>
-    <td class="email-footer">
-      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" /></div>
+    <td class="email-footer" data-email-footer>
+      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" width="166" /></div>
       <p class="footer-brand">Unison Hardware, Inc. 旗下品牌</p>
-      <p class="footer-support">如需帮助或支持，请访问 <a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> 或致电技术支持：<span data-asset-text="supportPhone"></span>。</p>
-      <p class="footer-disclaimer">您收到此邮件是因为有人使用您的邮箱地址。<br />如果您认为此邮件发送有误，请忽略本邮件。</p>
+      <p class="footer-support">支持：<a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> &middot; <strong><span data-asset-text="supportPhone"></span></strong></p>
+      <p class="footer-disclaimer">此邮件由 INOX Smart 服务流程自动发送。<br />如您误收到此邮件，请忽略。</p>
     </td>
   </tr>
 </template>
 
 <template data-component="footer" data-language="en">
   <tr>
-    <td class="email-footer">
-      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" /></div>
+    <td class="email-footer" data-email-footer>
+      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" width="166" /></div>
       <p class="footer-brand">A division of Unison Hardware, Inc.</p>
-      <p class="footer-support">For help or support, visit <a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> or call our Direct Tech Support, <span data-asset-text="supportPhone"></span>.</p>
-      <p class="footer-disclaimer">You received this email because someone is using your email address.<br />If you believe this was sent in error, please disregard this message.</p>
+      <p class="footer-support">Support: <a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> &middot; <strong><span data-asset-text="supportPhone"></span></strong></p>
+      <p class="footer-disclaimer">This automated email was sent as part of an INOX Smart service workflow.<br />If you received it in error, please disregard it.</p>
     </td>
   </tr>
 </template>
 
 <template data-component="footer" data-language="es">
   <tr>
-    <td class="email-footer">
-      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" /></div>
+    <td class="email-footer" data-email-footer>
+      <div class="footer-logo-wrap"><img class="footer-logo" data-asset-src="logo" alt="INOX Smart" width="166" /></div>
       <p class="footer-brand">Una división de Unison Hardware, Inc.</p>
-      <p class="footer-support">Para ayuda o soporte, visita <a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> o llama a soporte técnico directo al <span data-asset-text="supportPhone"></span>.</p>
-      <p class="footer-disclaimer">Has recibido este correo electrónico porque alguien está utilizando tu dirección de correo electrónico.<br />Si crees que se envió por error, ignora este mensaje.</p>
+      <p class="footer-support">Soporte: <a class="footer-link" data-asset-href="supportUrl" target="_blank" rel="noopener noreferrer"><span data-asset-text="supportLabel"></span></a> &middot; <strong><span data-asset-text="supportPhone"></span></strong></p>
+      <p class="footer-disclaimer">Este correo automático fue enviado como parte de un proceso de servicio de INOX Smart.<br />Si lo recibiste por error, ignóralo.</p>
     </td>
   </tr>
 </template>
